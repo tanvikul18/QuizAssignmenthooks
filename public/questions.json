@@ -3,6 +3,7 @@
     "questions":[
         {
             "question":"The Statue of Liberty was a gift to the US from which Country?",
+            "highlights": ["Country"],
             "options":[
                 {
                     "label":"France",
@@ -21,6 +22,7 @@
         },
         {
             "question": "Where did the bungee jump originate?",
+            "highlights": ["bungee", "jump"],
             "options": [
                 {
                     "label": "Canada",
@@ -42,6 +44,7 @@
         },
         {
             "question": "Which country is nicknamed 'the boot'?",
+             "highlights": ["country"],
             "options": [
                 {
                     "label": "Italy",
@@ -63,6 +66,7 @@
         },
         {
             "question": "Which country invented tea?",
+            "highlights": ["country"],
             "options": [
                 {
                     "label": "India",
@@ -76,6 +80,7 @@
         },
         {
             "question": "Which country is home to the most lakes in the entire world?",
+            "highlights": ["country"],
             "options": [
                 {
                     "label": "Norway",
