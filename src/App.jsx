@@ -1,6 +1,5 @@
 import { useState,useEffect } from "react"
 import Main from "../src/components/Main/Main.jsx"
-import Header from "./components/Header/Header.jsx";
 
 function App() {
   const [quesData,setquesData] = useState([]);
