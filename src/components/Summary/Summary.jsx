@@ -28,7 +28,7 @@ export default function Summary({ dispatch, totalPoints, actualPoints }) {
 
       {totalPercent < 80 ? (
         <>
-          <p>Sorry! You failed this quiz.</p>
+          <p role="alert">Sorry! You failed this quiz.</p>
           <div className="retry">
             <span>Want to try again?</span>
             <button onClick={handleRestart}>Restart</button>
