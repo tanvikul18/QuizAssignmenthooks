@@ -1,0 +1,29 @@
+.container{
+  width: 780px;
+  background-color: #17202a;
+  border-radius: 5px;
+}
+.intro-wrapper{
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+button{
+    outline: none;
+    border: none;
+    background-color: #229954;
+    color: #fff;
+    padding: 0.7rem 2rem;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.intro-wrapper p{
+    margin: 1rem 0;
+}
+.txt{
+    text-align: left;
+}
+.txt ul{
+    padding: 1rem;
+}

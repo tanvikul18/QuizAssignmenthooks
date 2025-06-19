@@ -1,0 +1,19 @@
+.finish-screen{
+    padding: 2rem;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.finish-screen p{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.finish-screen button{
+    margin : 1rem 0;
+}
+.retry span{
+    padding: 1rem;
+   font-size: 18px;
+}
