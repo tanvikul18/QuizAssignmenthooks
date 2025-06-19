@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./Quiz.css";
 
+const rederHighlighText = (quesTxt,highlights)=>{
+   if (!quesTxt || !highlights || highlights.length === 0) return quesTxt;
+   const parts = quesTxt.split(new RegExp(`(${highlights?.join("|")})`, "gi"));
+
+                  return  parts.map((part, index) =>
+                      highlights.some(
+                        (h) => h.toLowerCase() === part.toLowerCase()
+                      ) ? (
+                        <strong key={index}>{part}</strong>
+                      ) : (
+                        part
+                      )
+                    )
+}
 export default function Quiz({
   index,
   totalQuestions,
@@ -12,7 +26,19 @@ export default function Quiz({
 }) {
   const progressPercent = Math.round((index / totalQuestions) * 100);
    const isLastQuestion = index > totalQuestions;
-  // Handle option click
+   console.log(isLastQuestion)
+    const isFinalQuestion = index === totalQuestions;
+  const isPastLastQuestion = index > totalQuestions;
+
+  useEffect(() => {
+    if (isPastLastQuestion) {
+      dispatch({ type: "summary" });
+    }
+  }, [isPastLastQuestion, dispatch]);
+
+ 
+  if (isPastLastQuestion) return null;
+
   const handleOptionClick = (selectedIndex) => {
     dispatch({ type: "newAns", payload: selectedIndex });
     setTimeout(() => {
@@ -20,7 +46,7 @@ export default function Quiz({
     }, 400);
   };
    const handlePrev=(e)=>{
-    dispatch({type: "review"})
+    dispatch({type: "prevQuestions"})
     
   }
   const handleNext=()=>{
@@ -28,15 +54,6 @@ export default function Quiz({
   }
  
  
-  if (isLastQuestion) {
-    dispatch({ type: "summary" });
-    return null;
-  }
-
- 
-  if (!questions || !questions.options) {
-    return <div className="quiz-container">Invalid question data.</div>;
-  }
 
   return (
     <div className="quiz-container" aria-labelledby="quiz-question">
@@ -44,16 +61,16 @@ export default function Quiz({
         <div className="quiz-header-card">
             <div className="quiz-header">
                 {
-              isLastQuestion  ?  '': (<div>
-                <button className="btn btnPrev" disabled={index === 1} onClick={handlePrev} title="Previous" aria-label="Previous">&lt;</button>
-              </div>)
+                  !isPastLastQuestion && <div>
+                    <button className="btn btnPrev" disabled={index === 1} onClick={handlePrev} title="Previous" aria-label="Previous">&lt;</button>
+                  </div>
               }
               
               
               <div>
                   <span className="quiz-countnumber">
                   {
-                  index <= totalQuestions ?  (<><strong>0{index}</strong><span className="quiz-count" >/ 0{totalQuestions}</span></>): ""
+                     !isPastLastQuestion && <><strong>0{index}</strong><span className="quiz-count" >/ 0{totalQuestions}</span></>
                 }
                 
               </span>
@@ -62,7 +79,7 @@ export default function Quiz({
               {
               isReview ? (<div className="quiz-next">
                 {
-                  isLastQuestion ?   '' :   <button className="btn btnNext" onClick={handleNext} title="Next" aria-label="Next">&gt;</button>
+                  !isPastLastQuestion && <button className="btn btnNext" onClick={handleNext} title="Next" aria-label="Next">&gt;</button>
                 }
               </div>): (<div></div>)
               
@@ -79,20 +96,8 @@ export default function Quiz({
 
             <div className="card">
               <div className="question-area">
-                <div id="quiz-question" className="question-text">  {questions.question
-                    .split(new RegExp(`(${questions.highlights.join("|")})`, "gi"))
-                    .map((part, index) =>
-                      questions.highlights.some(
-                        (h) => h.toLowerCase() === part.toLowerCase()
-                      ) ? (
-                        <strong key={index}>{part}</strong>
-                      ) : (
-                        part
-                      )
-                    )}</div>
-                {/* {questions.subtitle && (
-                  <div className="subtitle">{questions.subtitle}</div>
-                )} */}
+                <div id="quiz-question" className="question-text">  {rederHighlighText(questions?.question,questions?.highlights)}</div>
+             
               </div>
             </div>
         </div>
@@ -105,7 +110,7 @@ export default function Quiz({
 
               return (
                 <button
-                  key={ind}
+                  key={option.label+ind}
                   className={optionClass}
                   onClick={!isReview ? () => handleOptionClick(ind) : undefined}
                 >

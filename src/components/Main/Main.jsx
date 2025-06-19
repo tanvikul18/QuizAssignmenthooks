@@ -57,14 +57,15 @@ function reducer(state, action) {
       };
     }
 
-    case "prevQuetions": {
+    case "prevQuestions": {
       const prevIndex = state.index - 1;
       const saved = state.answers[prevIndex] || { index: -1, label: null };
       return {
         ...state,
         index: prevIndex,
         optTxt: saved.label,
-        answerIndex: saved.index
+        answerIndex: saved.index,
+        isReview:false
       };
     }
 
@@ -81,7 +82,7 @@ function reducer(state, action) {
     }
 
     case "summary":
-      return { ...state, index: state.index + 1, status: "finish" };
+      return { ...state,  status: "finish" };
 
     case "restart":
       return {
@@ -102,7 +103,7 @@ function reducer(state, action) {
 
 function Main({questionsData}) {
   const shuffledRef = useRef();
- console.log(questionsData)
+
   const[{questions,status,index,optTxt,answerIndex,actualPoints,isReview},dispatch]=useReducer(reducer,initialStates);
   const totalQuestions = questionsData.length;
   const totalPoints = totalQuestions * 5;
@@ -115,7 +116,7 @@ function Main({questionsData}) {
         options: shuffleArray(q.options), 
       }));
       shuffledRef.current = shuffledQs;
-      console.log(shuffledQs)
+    //  console.log(shuffledQs)
   
           dispatch({type: "active",payload : shuffledQs})
       }
