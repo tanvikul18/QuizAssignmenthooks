@@ -107,7 +107,7 @@ export default function Quiz({
                 <button
                   key={ind}
                   className={optionClass}
-                  onClick={() => handleOptionClick(ind)}
+                  onClick={!isReview ? () => handleOptionClick(ind) : undefined}
                 >
                   <span>
                     {String.fromCharCode(97 + ind)}.&nbsp;{option.label}
