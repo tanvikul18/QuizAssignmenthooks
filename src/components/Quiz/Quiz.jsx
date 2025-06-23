@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import "./Quiz.css";
 
-const rederHighlighText = (quesTxt,highlights)=>{
+const rederHighlightText = (quesTxt,highlights)=>{
    if (!quesTxt || !highlights || highlights.length === 0) return quesTxt;
    const parts = quesTxt.split(new RegExp(`(${highlights?.join("|")})`, "gi"));
-
+  //console.log(parts)
                   return  parts.map((part, index) =>
                       highlights.some(
                         (h) => h.toLowerCase() === part.toLowerCase()
@@ -57,8 +57,8 @@ export default function Quiz({
 
   return (
     <div className="quiz-container" aria-labelledby="quiz-question">
-      <div className="quiz" key={index}>
-        <div className="quiz-header-card">
+      <main className="quiz" key={index}>
+        <header className="quiz-header-card">
             <div className="quiz-header">
                 {
                   !isPastLastQuestion && <div>
@@ -86,22 +86,22 @@ export default function Quiz({
               }
             </div>
             <div className="progress"> 
-            <div className="progress-bar" aria-hidden="true">
-              <div
-                id="progress-fill"
-                style={{ width: `${progressPercent}%` }}
-              ></div>
-            </div>
-            </div>
-
-            <div className="card">
-              <div className="question-area">
-                <div id="quiz-question" className="question-text">  {rederHighlighText(questions?.question,questions?.highlights)}</div>
-             
+              <div className="progress-bar" aria-hidden="true">
+                <div
+                  id="progress-fill"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
               </div>
             </div>
-        </div>
-        <div className="options-card">
+
+            <section className="card">
+              <div className="question-area">
+                <div id="quiz-question" className="question-text">  {rederHighlightText(questions?.question,questions?.highlights)}</div>
+             
+              </div>
+            </section>
+        </header>
+        <section className="options-card">
           <fieldset className="options-area">
             <legend className="sr-only">Choices</legend>
             {questions.options.map((option, ind) => {
@@ -121,10 +121,8 @@ export default function Quiz({
               );
             })}
           </fieldset>
-
-        
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }

@@ -15,13 +15,14 @@ export default function Summary({ dispatch, totalPoints, actualPoints }) {
   const handleRestart = () => dispatch({ type: 'restart' });
 
   return (
-    <div className="summary-container">
-      <div className="summary-card">
-        <h2>You have completed the quiz.</h2>
-        <p><em>You can review the quiz by clicking on Review.</em></p>
-
+    <main className="summary-container" role="main" aria-labelledby="summary-heading">
+      <section className="summary-card">
+        <header>
+          <h2 id= "summary-heading">You have completed the quiz.</h2>
+          <p><em>You can review the quiz by clicking on Review.</em></p>
+        </header>
+        <section className='summmary-score'>
         <div className="score">You got: {totalPercent} %</div>
-
         {totalPercent < 80 ? (
           <>
             <p className="fail">Sorry! You failed this quiz.</p>
@@ -30,12 +31,12 @@ export default function Summary({ dispatch, totalPoints, actualPoints }) {
         ) : (
           <p className="pass">Great! You passed the quiz.</p>
         )}
-
-        <div className="button-row">
+        </section>
+        <footer className="button-row">
           <button onClick={handleReview} >Review</button>
           <button onClick={handleRestart}>Restart</button>
-        </div>
-      </div>
-    </div>
+        </footer>
+      </section>
+    </main>
   );
 }

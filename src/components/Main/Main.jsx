@@ -58,15 +58,15 @@ function reducer(state, action) {
     }
 
     case "prevQuestions": {
-      const prevIndex = state.index - 1;
-      const saved = state.answers[prevIndex] || { index: -1, label: null };
-      return {
-        ...state,
-        index: prevIndex,
-        optTxt: saved.label,
-        answerIndex: saved.index,
-        isReview:false
-      };
+        const prevIndex = state.index - 1;
+        const saved = state.answers[prevIndex] || { index: -1, label: null };
+        return {
+          ...state,
+          index: prevIndex,
+          optTxt: saved.label,
+          answerIndex: saved.index,
+          isReview:false
+        };
     }
 
     case "review": {
