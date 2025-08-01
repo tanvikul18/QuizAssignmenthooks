@@ -88,6 +88,12 @@
     cursor: pointer;
     color: #a9a9a9;
 }
+.btnNext,.btnPrev{
+  font-weight: bold;
+}
+.btnPrev:disabled{
+  opacity: 0.5;
+}
 /* Card content */
 .card {
   padding: 24px 16px 16px;
@@ -181,7 +187,7 @@
 }
 .question-area {
   margin-bottom: 8px;
-  animation: slideInRight 0.5s ease-out;
+  animation: slideInRight 0.5s ease-out; 
 }
 
 .options-area {
@@ -210,7 +216,7 @@ height:1px;
 overflow:hidden;
 }
 /*Keyframes*/
-@keyframes slideInRight {
+ @keyframes slideInRight {
   from {
     opacity: 0;
     transform: translateX(40px);
@@ -219,7 +225,7 @@ overflow:hidden;
     opacity: 1;
     transform: translateX(0);
   }
-}
+} 
 
 @keyframes liftUpCard {
   from {
@@ -230,7 +236,7 @@ overflow:hidden;
     transform: translateY(0) scale(1);
     opacity: 1;
   }
-}
+} 
 /* Responsive */
 @media (max-width: 600px) {
   .quiz-container {
